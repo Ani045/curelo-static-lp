@@ -15,8 +15,8 @@ const TestDetails = ({ testDetailsData }) => {
 
         {/* 1. Header & Description */}
         <div className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-800 uppercase mb-4 tracking-wide">
-            Test Details
+          <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4 tracking-wide">
+            {testDetails.title || 'Test Details'}
           </h2>
           <p className="text-gray-600 leading-relaxed text-[15px] lg:text-base text-justify lg:text-left">
             {testDetails.description}

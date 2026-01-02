@@ -5,10 +5,11 @@ import SafeIcon from '../common/SafeIcon';
 
 const { FiChevronDown, FiChevronUp, FiHelpCircle } = FiIcons;
 
-const FAQSection = () => {
+const FAQSection = ({ faqsData }) => {
   const [openFAQ, setOpenFAQ] = useState(null);
 
-  const faqs = [
+  // Use provided FAQs or fallback to default
+  const faqs = faqsData || [
     {
       question: "How does the home sample collection work?",
       answer: "Once you book a test, a certified phlebotomist will visit your home at your scheduled time to collect samples. The service is free of cost."
@@ -28,18 +29,6 @@ const FAQSection = () => {
     {
       question: "What payment methods do you accept?",
       answer: "We accept all major debit/credit cards, UPI, net banking, and cash on home collection."
-    },
-    {
-      question: "Can I cancel or reschedule my appointment?",
-      answer: "Yes, you can cancel or reschedule your appointment up to 2 hours before the scheduled time without any charges."
-    },
-    {
-      question: "Is fasting required for all tests?",
-      answer: "Not all tests require fasting. Specific requirements will be mentioned in your test details. Generally, 10-12 hours fasting is needed for lipid and glucose tests."
-    },
-    {
-      question: "How do I download my reports?",
-      answer: "Reports are automatically sent to your email and WhatsApp. You can also download them from our website using your registered mobile number."
     }
   ];
 

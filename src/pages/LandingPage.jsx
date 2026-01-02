@@ -12,9 +12,9 @@ import Footer from '../components/Footer';
 import StickyFooter from '../components/StickyFooter';
 
 const LandingPage = () => {
-    // Get page slug from URL params, default to 'full-body-checkup'
+    // Get page slug from URL params, default to 'comprehensive-body-checkup'
     const { pageSlug } = useParams();
-    const config = getPageConfig(pageSlug || 'full-body-checkup');
+    const config = getPageConfig(pageSlug || 'comprehensive-body-checkup');
 
     return (
         <div className="min-h-screen bg-white overflow-x-hidden">
@@ -31,10 +31,10 @@ const LandingPage = () => {
             {/* Can't Find / Help Section */}
             <CantFindSection />
 
-            {/* FAQ Section */}
-            <FAQSection />
+            {/* FAQ Section - Dynamic per page */}
+            <FAQSection faqsData={config.faqs} />
 
-            {/* Footer only - removed all other sections */}
+            {/* Footer */}
             <Footer />
             <StickyFooter />
         </div>

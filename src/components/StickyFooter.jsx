@@ -25,10 +25,18 @@ const StickyFooter = () => {
   }, []);
 
   const scrollToForm = () => {
-    // Try desktop input first, then mobile
-    const desktopInput = document.getElementById('hero-name-input-desktop');
-    const mobileInput = document.getElementById('hero-name-input');
-    const nameInput = desktopInput || mobileInput;
+    // Check if we're on desktop (lg breakpoint)
+    const isDesktop = window.innerWidth >= 1024;
+    let nameInput;
+
+    if (isDesktop) {
+      // On desktop, target the desktop form input
+      nameInput = document.getElementById('hero-name-input-desktop');
+    } else {
+      // On mobile, target the mobile form input
+      nameInput = document.getElementById('hero-name-input-mobile');
+    }
+
     if (nameInput) {
       nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
       setTimeout(() => nameInput.focus(), 500);
@@ -45,9 +53,7 @@ const StickyFooter = () => {
           onClick={scrollToForm}
           className="w-full bg-[#143a69] hover:bg-[#0f2d52] text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg text-base uppercase tracking-wide flex items-center justify-center gap-2"
         >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-          </svg>
+
           Book Now
         </button>
       </div>
