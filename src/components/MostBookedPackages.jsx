@@ -2,13 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
-import { useCMS } from '../context/CMSContext';
 
 const { FiActivity, FiDroplet, FiHeart, FiFilter, FiShield, FiThermometer, FiFileText, FiZap, FiStar, FiUsers, FiCheck } = FiIcons;
 
-const MostBookedPackages = () => {
-  const { data } = useCMS();
-  const { mostBookedPackages } = data;
+const MostBookedPackages = ({ packagesData }) => {
+  const mostBookedPackages = packagesData;
 
   // Icons map to reconstruct the icons
   const iconMap = {
@@ -128,7 +126,7 @@ const MostBookedPackages = () => {
                     // Check if we're on desktop (lg breakpoint)
                     const isDesktop = window.innerWidth >= 1024;
                     let nameInput;
-                    
+
                     if (isDesktop) {
                       // On desktop, target the desktop form input
                       nameInput = document.getElementById('hero-name-input-desktop');
@@ -136,7 +134,7 @@ const MostBookedPackages = () => {
                       // On mobile, target the mobile form input
                       nameInput = document.getElementById('hero-name-input-mobile');
                     }
-                    
+
                     if (nameInput) {
                       nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
                       setTimeout(() => nameInput.focus(), 500);

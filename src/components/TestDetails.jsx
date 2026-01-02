@@ -1,13 +1,11 @@
 import React from 'react';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
-import { useCMS } from '../context/CMSContext';
 
 const { FiFileText, FiUser, FiHome, FiClock } = FiIcons;
 
-const TestDetails = () => {
-  const { data } = useCMS();
-  const { testDetails } = data;
+const TestDetails = ({ testDetailsData }) => {
+  const testDetails = testDetailsData;
 
   const icons = [FiFileText, FiUser, FiHome, FiClock];
 
