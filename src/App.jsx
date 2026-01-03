@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
+import ComprehensivePage from './pages/ComprehensivePage';
+import ExecutivePage from './pages/ExecutivePage';
+import EssentialPage from './pages/EssentialPage';
 import './App.css';
 
 function App() {
@@ -8,10 +10,12 @@ function App() {
     <Router>
       <div className="app">
         <Routes>
-          {/* Default route - Full Body Checkup */}
-          <Route path="/" element={<LandingPage />} />
-          {/* Dynamic route for other pages */}
-          <Route path="/:pageSlug" element={<LandingPage />} />
+          {/* Default route - Comprehensive Full Body Checkup */}
+          <Route path="/" element={<ComprehensivePage />} />
+          {/* Specific routes for each package type */}
+          <Route path="/comprehensive" element={<ComprehensivePage />} />
+          <Route path="/executive" element={<ExecutivePage />} />
+          <Route path="/essential" element={<EssentialPage />} />
         </Routes>
       </div>
     </Router>

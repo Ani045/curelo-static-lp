@@ -5,7 +5,7 @@ import SafeIcon from '../common/SafeIcon';
 
 const { FiActivity, FiDroplet, FiHeart, FiFilter, FiShield, FiThermometer, FiFileText, FiZap, FiStar, FiUsers, FiCheck } = FiIcons;
 
-const MostBookedPackages = ({ packagesData }) => {
+const MostBookedPackages = ({ packagesData, onPackageSelect }) => {
   const mostBookedPackages = packagesData;
 
   // Icons map to reconstruct the icons
@@ -123,6 +123,11 @@ const MostBookedPackages = ({ packagesData }) => {
 
                 <button
                   onClick={() => {
+                    // Auto-fill the selected package in form
+                    if (onPackageSelect) {
+                      onPackageSelect(pkg.title);
+                    }
+                    
                     // Check if we're on desktop (lg breakpoint)
                     const isDesktop = window.innerWidth >= 1024;
                     let nameInput;

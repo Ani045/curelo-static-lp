@@ -2,6 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 
+// Utility function to extract UTM parameters from URL
+const getUTMParams = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return {
+    utmSource: urlParams.get('utm_source') || '',
+    utmTerm: urlParams.get('utm_term') || '',
+    gclid: urlParams.get('gclid') || '',
+    adName: urlParams.get('utm_content') || '',
+    adsetName: urlParams.get('utm_campaign') || '',
+    campaign: urlParams.get('utm_medium') || ''
+  };
+};
+
 const { FiUser, FiPhone, FiMapPin, FiCheck, FiSearch, FiHome, FiFileText, FiUsers, FiChevronDown, FiX } = FiIcons;
 
 // All available services
@@ -407,7 +420,7 @@ const ServiceSelect = ({ value, onChange, placeholder = "Select Service/Test" })
   );
 };
 
-const HeroSection = ({ heroData }) => {
+const HeroSection = ({ heroData, pageType, selectedPackage }) => {
   const hero = heroData;
 
   const [formData, setFormData] = useState({
@@ -430,6 +443,16 @@ const HeroSection = ({ heroData }) => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
+  // Auto-fill service when selectedPackage changes
+  useEffect(() => {
+    if (selectedPackage) {
+      setFormData(prev => ({
+        ...prev,
+        service: selectedPackage
+      }));
+    }
+  }, [selectedPackage]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -443,51 +466,28 @@ const HeroSection = ({ heroData }) => {
     setIsSubmitting(true);
 
     try {
+      // Get UTM parameters from URL
+      const utmParams = getUTMParams();
+      
+      // Submit to secure backend instead of LeadSquared directly
+      const response = await fetch('http://localhost:3001/api/lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          city: formData.city,
+          service: formData.service,
+          _pageType: pageType, // Internal field for backend mapping only
+          ...utmParams
+        })
+      });
 
-      const payload = [
-        {
-          "Attribute": "FirstName",
-          "Value": formData.name.split(' ')[0] || formData.name
-        },
-        {
-          "Attribute": "LastName",
-          "Value": formData.name.split(' ').slice(1).join(' ') || ""
-        },
-        {
-          "Attribute": "Phone",
-          "Value": formData.phone
-        },
-        {
-          "Attribute": "mx_Patient_City",
-          "Value": formData.city
-        },
-        {
-          "Attribute": "Source",
-          "Value": "Google_lp"
-        },
-        {
-          "Attribute": "mx_Lead_Type",
-          "Value": "P1 - Curelo New"
-        },
-        {
-          "Attribute": "mx_Product_Service_Interest",
-          "Value": formData.service
-        }
-      ];
+      const result = await response.json();
 
-      // Submit to LeadSquared API
-      const response = await fetch(
-        'https://api-in21.leadsquared.com/v2/LeadManagement.svc//Lead.CreateOrUpdate?postUpdatedLead=false&accessKey=u$r93fb2f084e33e51645ac06f42b03e486&secretKey=f8b5a203607c8fc8c2a16107afe18cf28ab5ab04',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload)
-        }
-      );
-
-      if (response.ok) {
+      if (response.ok && result.success) {
         // Success - reset form
         setFormData({
           name: '',
@@ -497,7 +497,7 @@ const HeroSection = ({ heroData }) => {
         });
         alert('Thank you! Your request has been submitted successfully.');
       } else {
-        throw new Error('Submission failed');
+        throw new Error(result.message || 'Submission failed');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
