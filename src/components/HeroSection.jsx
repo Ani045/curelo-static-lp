@@ -468,9 +468,9 @@ const HeroSection = ({ heroData, pageType, selectedPackage }) => {
     try {
       // Get UTM parameters from URL
       const utmParams = getUTMParams();
-      
-      // Submit to secure backend instead of LeadSquared directly
-      const response = await fetch('http://localhost:3001/api/lead', {
+
+      // Submit to Vercel serverless function
+      const response = await fetch('/api/lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -480,7 +480,7 @@ const HeroSection = ({ heroData, pageType, selectedPackage }) => {
           phone: formData.phone,
           city: formData.city,
           service: formData.service,
-          _pageType: pageType, // Internal field for backend mapping only
+          pageType: pageType, // For campaign mapping
           ...utmParams
         })
       });
