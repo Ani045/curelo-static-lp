@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import * as FiIcons from 'react-icons/fi';
+import SafeIcon from '../common/SafeIcon';
+
+const { FiPhone, FiMessageCircle } = FiIcons;
 
 const StickyFooter = () => {
   const [showButton, setShowButton] = useState(false);
@@ -49,13 +53,30 @@ const StickyFooter = () => {
         }`}
     >
       <div className="container mx-auto max-w-5xl">
-        <button
-          onClick={scrollToForm}
-          className="w-full bg-[#143a69] hover:bg-[#0f2d52] text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg text-base uppercase tracking-wide flex items-center justify-center gap-2"
-        >
-
-          Book Now
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={scrollToForm}
+            className="flex-1 bg-[#143a69] hover:bg-[#0f2d52] text-white font-bold py-3 px-4 rounded-lg transition-all shadow-md hover:shadow-lg text-sm uppercase tracking-wide flex items-center justify-center gap-2"
+          >
+            Book Now
+          </button>
+          <a
+            href="tel:+918076069330"
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-md hover:shadow-lg text-sm uppercase tracking-wide flex items-center justify-center gap-2"
+          >
+            <SafeIcon icon={FiPhone} className="w-4 h-4" />
+            Call
+          </a>
+          <a
+            href="https://wa.me/918076069330?text=Hi%2C%20I%20want%20to%20book%20a%20health%20test"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 bg-[#25d366] hover:bg-[#1fb855] text-white font-bold py-3 px-4 rounded-lg transition-all shadow-md hover:shadow-lg text-sm uppercase tracking-wide flex items-center justify-center gap-2"
+          >
+            <SafeIcon icon={FiMessageCircle} className="w-4 h-4" />
+            WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   );

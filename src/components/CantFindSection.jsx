@@ -14,22 +14,32 @@ const CantFindSection = () => {
             <h2 className="text-2xl md:text-3xl font-extrabold text-[#143a69] mb-2">
               Can't find what you need?
             </h2>
-            <a href="#" className="inline-flex items-center gap-2 text-[#143a69] font-semibold hover:text-[#0f2d52] transition-colors group">
+            <a 
+              href="https://wa.me/918076069330?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20health%20packages" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#143a69] font-semibold hover:text-[#0f2d52] transition-colors group"
+            >
               Say 'hi' to connect with our Health Experts! 
               <SafeIcon icon={FiArrowRight} className="transform group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
 
-          <div className="relative group cursor-pointer">
+          <a 
+            href="https://wa.me/918076069330?text=Hi%2C%20I%20want%20to%20know%20more%20about%20your%20health%20packages" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="relative group cursor-pointer"
+          >
             <div className="absolute inset-0 bg-[#7bdb81] rounded-full blur-lg opacity-40 group-hover:opacity-60 transition-opacity animate-pulse"></div>
-            <div className="relative w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-[#7bdb81]">
+            <div className="relative w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-[#7bdb81] group-hover:border-[#65c46b] transition-colors">
               <img 
                 src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
                 alt="WhatsApp" 
                 className="w-10 h-10"
               />
             </div>
-          </div>
+          </a>
 
         </div>
       </div>

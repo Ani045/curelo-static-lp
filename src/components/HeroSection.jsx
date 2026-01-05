@@ -15,7 +15,7 @@ const getUTMParams = () => {
   };
 };
 
-const { FiUser, FiPhone, FiMapPin, FiCheck, FiSearch, FiHome, FiFileText, FiUsers, FiChevronDown, FiX } = FiIcons;
+const { FiUser, FiPhone, FiMapPin, FiCheck, FiSearch, FiHome, FiFileText, FiUsers, FiChevronDown, FiX, FiMessageCircle } = FiIcons;
 
 // All available services
 const SERVICES_LIST = [
@@ -634,6 +634,27 @@ const HeroSection = ({ heroData, pageType, selectedPackage }) => {
                     >
                       {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
                     </button>
+                    
+                    {/* Call and WhatsApp Buttons */}
+                    <div className="flex gap-3 mt-3">
+                      <a
+                        href="tel:+918076069330"
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-full transition-colors shadow-sm flex items-center justify-center gap-2"
+                      >
+                        <SafeIcon icon={FiPhone} className="w-4 h-4" />
+                        Call Now
+                      </a>
+                      <a
+                        href="https://wa.me/918076069330?text=Hi%2C%20I%20want%20to%20book%20a%20health%20test"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 bg-[#25d366] hover:bg-[#1fb855] text-white font-semibold py-3 rounded-full transition-colors shadow-sm flex items-center justify-center gap-2"
+                      >
+                        <SafeIcon icon={FiMessageCircle} className="w-4 h-4" />
+                        WhatsApp
+                      </a>
+                    </div>
+                    
                     <p className="text-[9px] text-gray-400 text-center pt-1">
                       *Prices are subject to change as per city
                     </p>
@@ -799,6 +820,27 @@ const HeroSection = ({ heroData, pageType, selectedPackage }) => {
                   >
                     {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
                   </button>
+                  
+                  {/* Call and WhatsApp Buttons */}
+                  <div className="flex gap-3 mt-3">
+                    <a
+                      href="tel:+918076069330"
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-full transition-colors shadow-sm flex items-center justify-center gap-2"
+                    >
+                      <SafeIcon icon={FiPhone} className="w-4 h-4" />
+                      Call Now
+                    </a>
+                    <a
+                      href="https://wa.me/918076069330?text=Hi%2C%20I%20want%20to%20book%20a%20health%20test"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-[#25d366] hover:bg-[#1fb855] text-white font-semibold py-3 rounded-full transition-colors shadow-sm flex items-center justify-center gap-2"
+                    >
+                      <SafeIcon icon={FiMessageCircle} className="w-4 h-4" />
+                      WhatsApp
+                    </a>
+                  </div>
+                  
                   <p className="text-[9px] text-gray-400 text-center pt-1">
                     *Prices are subject to change as per city
                   </p>
